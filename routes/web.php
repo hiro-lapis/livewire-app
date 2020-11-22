@@ -21,6 +21,17 @@ Route::get('/form', function () {
     return view('form');
 });
 
-Route::get('/register', function () {
-    return view('register');
-});
+
+/**
+ * 以下のルーティングはFortifyで定義されている
+ * /register        ユーザー登録
+ * /login           ログイン
+ * /forgot-password パスワードリセット
+ * */
+// Route::get('/register', function () {
+//     return view('auth.register');
+// })->name('register');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
